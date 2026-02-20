@@ -54,16 +54,7 @@ export default class Auth {
     return (await pool.execute(`SELECT * FROM auth WHERE user_id = ? `, [userId]))[0][0];
   }
 
-  static async updatePassword(userId, newPassHash) {
-    return (await pool.execute(`UPDATE auth SET password_hash = ? WHERE user_id = ? `, [newPassHash, userId]));
-  }
-
   static async logoutUser(userId) {
     await pool.execute(`UPDATE auth SET token = NULL WHERE user_id = ?`, [userId]);
-  }
-
-  static async deleteUser(userId) {
-    const [res] = await pool.execute(`DELETE FROM auth WHERE user_id = ?`, [userId]);
-    return res.affectedRows > 0;
   }
 }
