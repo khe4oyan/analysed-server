@@ -1,6 +1,9 @@
 // pool
 import pool from "../../utils/mysql.js";
 
+// utils
+import AppError from "../../utils/AppError.class.js";
+
 // constants
 import { PURCHASE_STATUSES } from '../../constants/purchaseStatusTypes.js';
 
@@ -23,4 +26,23 @@ export default class Purchase {
   static async listForStaff(userId) {
     return await Purchase.#getList(`WHERE created_by_id = ?`, [userId]);
   };
+
+  static async create(title, amount, userId) {
+    const [row] = await pool.execute(`
+      INSERT INTO purchase_requests (title, amount, created_by_id)
+      VALUES(?, ?, ?)`,
+      [title, amount, userId]
+    );
+
+    if (row.affectedRows > 0) {
+      return row.insertId;
+    }
+
+    throw new AppError("Purchase is not created", 500);
+  }
+
+  static async purchaseById(id) {
+    const [row] = await pool.execute(`SELECT * FROM purchase_requests WHERE id = ?`, [id]);
+    return row;
+  }
 }

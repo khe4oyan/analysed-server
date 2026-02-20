@@ -11,7 +11,7 @@ export default async function login(req, res) {
   const serviceResult = await loginService(email, password);
 
   if (serviceResult?.token) {
-    res.status(201).send({ token: serviceResult.token });
+    res.status(201).json({ token: serviceResult.token });
   } else {
     throw new AppError("Authentication failed", 401);
   }

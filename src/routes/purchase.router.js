@@ -13,6 +13,9 @@ import deletePurchaseController from "../controllers/purchase/deletePurchase.con
 import roleAccessMiddleware from "../middlewares/roleAccess.middleware.js";
 import validationResultMiddleware from "../middlewares/validationResult.middleware.js";
 
+// validators
+import * as purchaseValidator from '../validators/purchases.validator.js';
+
 // constants
 import { ROLES } from "../constants/userRoles.js";
 
@@ -27,6 +30,7 @@ router.get(
 router.post(
   "/create",
   roleAccessMiddleware([ROLES.STAFF]),
+  purchaseValidator.createValidator,
   validationResultMiddleware,
   createPurchaseController,
 );
@@ -34,6 +38,7 @@ router.post(
 router.patch(
   "/submit/:id",
   roleAccessMiddleware([ROLES.STAFF]),
+  purchaseValidator.submitValidator,
   validationResultMiddleware,
   submtiPurchaseController,
 );
@@ -41,6 +46,7 @@ router.patch(
 router.patch(
   "/approved/:id",
   roleAccessMiddleware([ROLES.ADMIN, ROLES.MANAGER]),
+  purchaseValidator.approvedValidator,
   validationResultMiddleware,
   approvedPurchaseController,
 );
@@ -48,6 +54,7 @@ router.patch(
 router.patch(
   "/rejected/:id",
   roleAccessMiddleware([ROLES.ADMIN, ROLES.MANAGER]),
+  purchaseValidator.rejectedValidator,
   validationResultMiddleware,
   rejectedPurchaseController,
 );
@@ -55,6 +62,7 @@ router.patch(
 router.delete(
   "/delete/:id",
   roleAccessMiddleware([ROLES.ADMIN, ROLES.MANAGER, ROLES.STAFF]),
+  purchaseValidator.deleteValidator,
   validationResultMiddleware,
   deletePurchaseController,
 );
