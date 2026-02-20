@@ -7,7 +7,7 @@ export async function up(knex) {
     table.increments("id").primary();
     table.string("email", 255).notNullable().unique();
     table.string("full_name", 255).notNullable();
-    table.enum("role", ["admin", "manager", "staff"]).notNullable();
+    table.enum("role", ["admin", "manager", "staff"]).notNullable().defaultTo("staff");
     table.timestamps(true, true);
   });
 
@@ -15,7 +15,7 @@ export async function up(knex) {
     table.increments("id").primary();
     table.integer("user_id").unsigned().notNullable().unique();
     table.string("password_hash").nullable().defaultTo(null);
-    table.string("token").nullable().defaultTo(null);
+    table.text("token").nullable().defaultTo(null);
     table.timestamps(true, true);
 
     table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
@@ -30,7 +30,6 @@ export async function up(knex) {
     table.enum("status", ["draft", "submitted", "approved", "rejected"]).defaultTo("draft");
     table.timestamps(true, true);
 
-    
     table.foreign('created_by_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
     table.foreign('approved_by_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
   });
