@@ -27,7 +27,7 @@ export async function up(knex) {
     table.integer("amount").notNullable();
     table.integer("created_by_id").unsigned().notNullable();
     table.integer("approved_by_id").unsigned().nullable().defaultTo(null);
-    table.enum("status", ["draft", "submitted", "approved", "rejected"]);
+    table.enum("status", ["draft", "submitted", "approved", "rejected"]).defaultTo("draft");
     table.timestamps(true, true);
 
     
