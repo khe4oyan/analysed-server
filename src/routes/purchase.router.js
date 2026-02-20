@@ -23,30 +23,35 @@ router.get(
   roleAccessMiddleware([ROLES.ADMIN, ROLES.MANAGER, ROLES.STAFF]),
   purchasesController,
 );
+
 router.post(
   "/create",
   roleAccessMiddleware([ROLES.STAFF]),
   validationResultMiddleware,
   createPurchaseController,
 );
+
 router.patch(
   "/submit/:id",
   roleAccessMiddleware([ROLES.STAFF]),
   validationResultMiddleware,
   submtiPurchaseController,
 );
+
 router.patch(
   "/approved/:id",
   roleAccessMiddleware([ROLES.ADMIN, ROLES.MANAGER]),
   validationResultMiddleware,
   approvedPurchaseController,
 );
+
 router.patch(
   "/rejected/:id",
   roleAccessMiddleware([ROLES.ADMIN, ROLES.MANAGER]),
   validationResultMiddleware,
   rejectedPurchaseController,
 );
+
 router.delete(
   "/delete/:id",
   roleAccessMiddleware([ROLES.ADMIN, ROLES.MANAGER, ROLES.STAFF]),
