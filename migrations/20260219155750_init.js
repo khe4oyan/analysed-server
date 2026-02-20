@@ -1,3 +1,8 @@
+// constants
+import { ROLES_VALUES } from "../src/constants/userRoles.js";
+import { PURCHASE_STATUS_TYPES } from "../src/constants/purchaseStatusTypes.js";
+import { AUDIT_TYPES } from "../src/constants/auditTypes.js";
+
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
@@ -7,7 +12,7 @@ export async function up(knex) {
     table.increments("id").primary();
     table.string("email", 255).notNullable().unique();
     table.string("full_name", 255).notNullable();
-    table.enum("role", ["admin", "manager", "staff"]).notNullable().defaultTo("staff");
+    table.enum("role", ROLES_VALUES).notNullable().defaultTo("staff");
     table.timestamps(true, true);
   });
 
@@ -27,7 +32,7 @@ export async function up(knex) {
     table.integer("amount").notNullable();
     table.integer("created_by_id").unsigned().notNullable();
     table.integer("approved_by_id").unsigned().nullable().defaultTo(null);
-    table.enum("status", ["draft", "submitted", "approved", "rejected"]).defaultTo("draft");
+    table.enum("status", PURCHASE_STATUS_TYPES).defaultTo("draft");
     table.timestamps(true, true);
 
     table.foreign('created_by_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
@@ -37,7 +42,7 @@ export async function up(knex) {
   await knex.schema.createTable("audit", (table) => {
     table.increments("id").primary();
     table.integer("user_id").unsigned().notNullable();
-    table.enum("type", ["purchase_request"]).notNullable();
+    table.enum("type", AUDIT_TYPES).notNullable();
     table.text("prev_value").notNullable();
     table.text("new_value").notNullable();
     table.timestamps(true, true);

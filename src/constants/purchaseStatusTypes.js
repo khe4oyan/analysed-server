@@ -1,0 +1,1 @@
+export const PURCHASE_STATUS_TYPES = ["draft", "submitted", "approved", "rejected"];

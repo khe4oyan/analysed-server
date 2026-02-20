@@ -1,5 +1,7 @@
 export const ROLES = {
-  ADMIN: "Admin",
-  MANAGER: "Manager",
-  STAFF: "Staff"
+  ADMIN: "admin",
+  MANAGER: "manager",
+  STAFF: "staff"
 }
+
+export const ROLES_VALUES = Object.values(ROLES);
