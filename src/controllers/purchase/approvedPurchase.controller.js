@@ -17,7 +17,7 @@ export default async function approvedPurchase(req, res) {
     throw new AppError("Only submited purchases can be approved", 400);
   }
 
-  await purchaseStatusChangeService(purchaseId, PURCHASE_STATUSES.APPROVED);
+  await purchaseStatusChangeService(purchaseId, PURCHASE_STATUSES.APPROVED, req.userData.id);
 
   res.status(200).json({ success: true });
 }

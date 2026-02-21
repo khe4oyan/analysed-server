@@ -35,7 +35,7 @@ export async function up(knex) {
     table.timestamps(true, true);
 
     table.foreign('created_by_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
-    table.foreign('approved_by_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+    table.foreign('resolved_by_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
   });
 
   await knex.schema.createTable("audit", (table) => {

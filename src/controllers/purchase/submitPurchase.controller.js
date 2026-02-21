@@ -26,7 +26,7 @@ export default async function createPurchase(req, res) {
   }
 
   // set status to submit
-  await purchaseStatusChangeService(purchaseId, PURCHASE_STATUSES.SUBMITTED);
+  await purchaseStatusChangeService(purchaseId, PURCHASE_STATUSES.SUBMITTED, userData.id);
 
   res.status(200).json({ success: true });
 }

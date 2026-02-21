@@ -17,7 +17,7 @@ export default async function rejectedPurchase(req, res) {
     throw new AppError("Only submited purchases can be rejected", 400);
   }
 
-  await purchaseStatusChangeService(purchaseId, PURCHASE_STATUSES.REJECTED);
+  await purchaseStatusChangeService(purchaseId, PURCHASE_STATUSES.REJECTED, req.userData.id);
 
   res.status(200).json({ success: true });
 }
