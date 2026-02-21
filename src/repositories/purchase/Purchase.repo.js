@@ -56,4 +56,15 @@ export default class Purchase {
 
     return row.affectedRows > 0;
   }
+
+  static async updateStatus(id, status) {
+    const [row] = await pool.execute(`
+      UPDATE purchase_requests 
+      SET status = ? 
+      WHERE id = ?`, 
+      [status, id]
+    );
+
+    return row.affectedRows > 0;
+  }
 }
