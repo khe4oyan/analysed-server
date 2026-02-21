@@ -28,7 +28,7 @@ app.use((req, _res, next) => {
 
 // routers
 app.get("/", (_, res) => {
-  res.status(200).json({ message: "ERP Backend is running" });
+  res.status(200).json({ message: "Analysed Backend is running" });
 });
 app.use("/api/auth", authRouter);
 app.use("/api/purchase", tokenAuthenticateMiddleware, purchaseRouter);
