@@ -29,10 +29,11 @@ router.post(
   loginController,
 );
 
-router.post(
-  "/logout", 
-  tokenAuthenticateMiddleware, 
-  logoutController,
-);
+router.post("/logout", tokenAuthenticateMiddleware, logoutController);
+
+router.get("/me", tokenAuthenticateMiddleware, (req, res) => {
+  delete req.userData.auth;
+  res.status(200).json({ success: true, userData: req.userData });
+});
 
 export default router;

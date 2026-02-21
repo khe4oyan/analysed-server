@@ -10,11 +10,11 @@ import { ROLES } from "../../constants/userRoles.js";
 export default async function purchaseList(userId, userRole) {
   const result = await roleBaseFunction({
     async [ROLES.ADMIN]() {
-      return await PurchaseRepo.listForAdmin(userId);
+      return await PurchaseRepo.listForAdmin();
     },
     
     async [ROLES.MANAGER]() {
-      return await PurchaseRepo.listForManager(userId);
+      return await PurchaseRepo.listForManager();
     },
 
     async [ROLES.STAFF] () {
