@@ -12,6 +12,6 @@ import { ROLES } from "../constants/userRoles.js";
 
 const router = Router();
 
-router.post("/list", roleAccessMiddleware([ROLES.ADMIN]), auditListController);
+router.get("/list", roleAccessMiddleware([ROLES.ADMIN]), auditListController);
 
 export default router;
