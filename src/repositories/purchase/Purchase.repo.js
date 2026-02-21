@@ -43,7 +43,7 @@ export default class Purchase {
 
   static async purchaseById(id) {
     const [row] = await pool.execute(`SELECT * FROM purchase_requests WHERE id = ?`, [id]);
-    return row;
+    return row[0];
   }
 
   static async updateById(id, title, amount) {
@@ -63,6 +63,16 @@ export default class Purchase {
       SET status = ? 
       WHERE id = ?`, 
       [status, id]
+    );
+
+    return row.affectedRows > 0;
+  }
+
+  static async deleteById(id) {
+    const [row] = await pool.execute(`
+      DELETE FROM purchase_requests 
+      WHERE id = ?`, 
+      [id]
     );
 
     return row.affectedRows > 0;

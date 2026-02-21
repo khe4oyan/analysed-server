@@ -1,1 +1,0 @@
-export const AUDIT_TYPES = ["purchase_request"];
