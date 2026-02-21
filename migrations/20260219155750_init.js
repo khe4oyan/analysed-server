@@ -1,7 +1,6 @@
 // constants
 import { ROLES_VALUES } from "../src/constants/userRoles.js";
 import { PURCHASE_STATUS_TYPES } from "../src/constants/purchaseStatusTypes.js";
-import { AUDIT_TYPES } from "../src/constants/auditTypes.js";
 
 /**
  * @param { import("knex").Knex } knex
@@ -42,9 +41,7 @@ export async function up(knex) {
   await knex.schema.createTable("audit", (table) => {
     table.increments("id").primary();
     table.integer("user_id").unsigned().notNullable();
-    table.enum("type", AUDIT_TYPES).notNullable();
-    table.text("prev_value").notNullable();
-    table.text("new_value").notNullable();
+    table.text("details").notNullable();
     table.timestamps(true, true);
 
     table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');

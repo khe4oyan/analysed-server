@@ -14,6 +14,7 @@ import pool from "./utils/mysql.js";
 // routes
 import authRouter from "./routes/auth.router.js";
 import purchaseRouter from "./routes/purchase.router.js";
+import auditRouter from './routes/audit.router.js';
 
 const app = express();
 app.use(express.json());
@@ -31,6 +32,7 @@ app.get("/", (_, res) => {
 });
 app.use("/api/auth", authRouter);
 app.use("/api/purchase", tokenAuthenticateMiddleware, purchaseRouter);
+app.use("/api/audit", tokenAuthenticateMiddleware, auditRouter);
 
 // final fallback and error barrier
 app.use(notExistendPathMiddleware);
