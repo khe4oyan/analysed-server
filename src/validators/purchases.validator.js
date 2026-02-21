@@ -13,8 +13,8 @@ const purchaseProperties =  [
 ];
 
 export const createValidator = purchaseProperties;
+export const editValidator = [...purchaseProperties, ...purchaseIdValidator];
 export const submitValidator = purchaseIdValidator;
 export const approvedValidator = purchaseIdValidator;
 export const rejectedValidator = purchaseIdValidator;
 export const deleteValidator = purchaseIdValidator;
-export const editValidator = purchaseProperties;
