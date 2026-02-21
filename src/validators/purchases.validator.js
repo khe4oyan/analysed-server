@@ -2,8 +2,7 @@
 import { body, param } from "express-validator";
 
 const purchaseIdValidator = [param("id").isInt({ min: 0 })];
-
-export const createValidator = [
+const purchaseProperties =  [
   body("title")
     .notEmpty().withMessage("title must not be empty")
     .isString().withMessage("title must be a string")
@@ -13,7 +12,9 @@ export const createValidator = [
     .isInt({ min: 1 }).withMessage("amount must be an integer greater than or equal to 1")
 ];
 
+export const createValidator = purchaseProperties;
 export const submitValidator = purchaseIdValidator;
 export const approvedValidator = purchaseIdValidator;
 export const rejectedValidator = purchaseIdValidator;
 export const deleteValidator = purchaseIdValidator;
+export const editValidator = purchaseProperties;

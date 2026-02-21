@@ -4,6 +4,7 @@ import { Router } from "express";
 // controllers
 import purchasesController from "../controllers/purchase/purchases.controller.js";
 import createPurchaseController from "../controllers/purchase/createPurchase.controller.js";
+import editPurchaseController from '../controllers/purchase/editPurchase.controller.js';
 import submtiPurchaseController from "../controllers/purchase/submitPurchase.controller.js";
 import approvedPurchaseController from "../controllers/purchase/approvedPurchase.controller.js";
 import rejectedPurchaseController from "../controllers/purchase/rejectedPurchase.controller.js";
@@ -33,6 +34,14 @@ router.post(
   purchaseValidator.createValidator,
   validationResultMiddleware,
   createPurchaseController,
+);
+
+router.put(
+  "/edit/:id",
+  roleAccessMiddleware([ROLES.STAFF]),
+  purchaseValidator.editValidator,
+  validationResultMiddleware,
+  editPurchaseController,
 );
 
 router.patch(
