@@ -14,7 +14,7 @@ import pool from "./utils/mysql.js";
 // routes
 import authRouter from "./routes/auth.router.js";
 import purchaseRouter from "./routes/purchase.router.js";
-import auditRouter from './routes/audit.router.js';
+import auditRouter from "./routes/audit.router.js";
 
 const app = express();
 app.use(express.json());
