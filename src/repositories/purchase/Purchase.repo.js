@@ -45,4 +45,15 @@ export default class Purchase {
     const [row] = await pool.execute(`SELECT * FROM purchase_requests WHERE id = ?`, [id]);
     return row;
   }
+
+  static async updateById(id, title, amount) {
+    const [row] = await pool.execute(`
+      UPDATE purchase_requests 
+      SET title = ?, amount = ? 
+      WHERE id = ?`, 
+      [title, amount, id]
+    );
+
+    return row.affectedRows > 0;
+  }
 }
