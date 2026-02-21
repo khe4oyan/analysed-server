@@ -6,4 +6,8 @@ export default class Audit {
     const [rows] = await pool.execute(`SELECT * FROM audit ORDER BY created_at ASC`);
     return rows;
   }
+
+  static async create(userId, details) {
+    await pool.execute(`INSERT INTO audit (user_id, details) VALUES (?, ?)`, [userId, details]);
+  }
 }

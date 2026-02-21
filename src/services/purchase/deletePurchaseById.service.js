@@ -1,3 +1,6 @@
+// sersvices
+import createAuditService from '../../services/audit/createAudit.service.js';
+
 // repository
 import PurchaseRepo from "../../repositories/purchase/Purchase.repo.js";
 
@@ -36,4 +39,6 @@ export default async function deletePurchaseById(purchaseId, userData) {
       await PurchaseRepo.deleteById(purchaseId);
     },
   }, userData.role);
+
+  await createAuditService(userData.id, `Deleted purchase: ${purchaseData.title}`);
 }

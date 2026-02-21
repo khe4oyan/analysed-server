@@ -60,7 +60,7 @@ export default class Purchase {
   static async updateStatus(id, status, approved_id) {
     const [row] = await pool.execute(`
       UPDATE purchase_requests 
-      SET status = ?, approved_by_id = ?
+      SET status = ?, resolved_by_id = ?
       WHERE id = ?`, 
       [status, approved_id, id]
     );

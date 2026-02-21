@@ -1,6 +1,7 @@
 // services
 import getPurchaseByIdService from '../../services/purchase/getPurchaseById.service.js';
 import purchaseStatusChangeService from '../../services/purchase/purchaseStatusChange.service.js';
+import createAuditService from '../../services/audit/createAudit.service.js';
 
 // utils
 import AppError from  '../../utils/AppError.class.js';
@@ -27,6 +28,8 @@ export default async function createPurchase(req, res) {
 
   // set status to submit
   await purchaseStatusChangeService(purchaseId, PURCHASE_STATUSES.SUBMITTED, userData.id);
+
+  await createAuditService(userData.id, `Submitted purchase: ${purchaseData.title}`);
 
   res.status(200).json({ success: true });
 }
