@@ -7,5 +7,5 @@ export default async function register(req, res) {
   const full_name = req.body.full_name;
 
   await registerService(email, password, full_name);
-  res.status(201).json({ message: "Account registered" });
+  res.status(201).json({ success: true });
 } 

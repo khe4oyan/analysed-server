@@ -6,5 +6,5 @@ export default async function purchases(req, res) {
 
   const result = await purchaseListService(id, role);
  
-  res.json({ purchases: result });
+  res.json({ success: true, purchases: result });
 }

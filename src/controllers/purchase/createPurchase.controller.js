@@ -7,5 +7,5 @@ export default async function createPurchase(req, res) {
 
   const purchaseData = await createPurchaseService(title, amount, id);
 
-  res.status(200).json({ purchaseData });
+  res.status(200).json({ success: true, purchaseData });
 }

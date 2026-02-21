@@ -1,7 +1,9 @@
 // libs
 import { body, param } from "express-validator";
 
-const purchaseIdValidator = [param("id").isInt({ min: 0 })];
+const purchaseIdValidator = [
+  param("id").isInt({ min: 0 }).withMessage("id must be number")
+];
 const purchaseProperties =  [
   body("title")
     .notEmpty().withMessage("title must not be empty")
